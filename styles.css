@@ -150,13 +150,152 @@ footer { background: var(--dark); color: rgba(255,255,255,0.5); padding: 2.5rem;
 @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 /* RESPONSIVE */
+/* ============================================
+   REEMPLAZA el @media (max-width: 900px) 
+   al final de tu styles.css con esto:
+   ============================================ */
+
 @media (max-width: 900px) {
-  nav { padding: 0.875rem 1.25rem; flex-wrap: wrap; }
-  .nav-center { order: 3; width: 100%; justify-content: center; }
-  #hero { grid-template-columns: 1fr; padding: 9rem 1.5rem 4rem; }
-  .hero-right { order: -1; }
-  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .form-row { grid-template-columns: 1fr; }
-  section:not(#hero) { padding: 3.5rem 1.25rem; }
-  footer { flex-direction: column; text-align: center; }
+
+  /* NAV */
+  nav {
+    padding: 0.875rem 1.25rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .nav-center {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+  .nav-right {
+    gap: 0.75rem;
+  }
+
+  /* HERO — columna única, centrado */
+  #hero {
+    grid-template-columns: 1fr;
+    padding: 7rem 1.25rem 3rem;
+    gap: 2.5rem;
+    text-align: center;
+    justify-items: center;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-sub {
+    text-align: center;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+  .hero-stats {
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .hero-right {
+    order: -1;   /* carousel arriba */
+    width: 100%;
+  }
+
+  /* CAROUSEL — que no desborde */
+  .carousel-wrap {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 12px;
+  }
+  .carousel-track {
+    width: 100%;
+  }
+  .carousel-slide {
+    min-width: 100%;
+    padding: 1rem;
+  }
+  .slide-label {
+    font-size: 0.95rem;
+  }
+  .slide-sub {
+    font-size: 0.75rem;
+    padding: 0.3rem 1rem 0;
+  }
+  .carousel-dots {
+    margin-top: 0.75rem;
+  }
+
+  /* SECTIONS */
+  section:not(#hero) {
+    padding: 3.5rem 1.25rem;
+  }
+  .section-sub {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  /* GRIDS */
+  .about-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .services-grid,
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* DIVISION HERO */
+  .division-hero {
+    padding: 6rem 1.25rem 3rem;
+    text-align: center;
+  }
+  .division-hero .hero-actions {
+    justify-content: center;
+  }
+  .division-hero > .container > div[style] {
+    justify-content: center;
+  }
+
+  /* FOOTER */
+  footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1.25rem;
+  }
+  .footer-links {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+/* Pantallas muy pequeñas */
+@media (max-width: 400px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+  .hero-stats {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+  }
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .btn-primary,
+  .btn-outline {
+    width: 100%;
+    text-align: center;
+  }
+  .nav-center {
+    gap: 0;
+  }
+  .nav-center a {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
 }
