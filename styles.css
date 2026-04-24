@@ -39,7 +39,9 @@ nav {
   display: grid; grid-template-columns: 1fr 1fr;
   min-height: 100vh; align-items: center;
   padding: 7rem 2.5rem 4rem; gap: 4rem;
-  background: var(--white); position: relative; overflow: hidden;
+  background: var(--white); position: relative;
+  overflow: hidden;
+  max-width: 100vw;
 }
 .hero-bg { position: absolute; top: -100px; right: -100px; width: 550px; height: 550px; border-radius: 50%; background: radial-gradient(circle, rgba(29,158,117,0.05) 0%, rgba(55,138,221,0.05) 50%, transparent 70%); pointer-events: none; }
 .hero-left { position: relative; z-index: 1; animation: fadeUp 0.7s ease both; }
@@ -149,11 +151,15 @@ footer { background: var(--dark); color: rgba(255,255,255,0.5); padding: 2.5rem;
 /* ANIMATIONS */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-/* RESPONSIVE */
 /* ============================================
-   REEMPLAZA el @media (max-width: 900px) 
-   al final de tu styles.css con esto:
+   RESPONSIVE — TABLET Y MÓVIL
    ============================================ */
+
+/* Evitar desborde horizontal en toda la página */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
 
 @media (max-width: 900px) {
 
@@ -162,6 +168,8 @@ footer { background: var(--dark); color: rgba(255,255,255,0.5); padding: 2.5rem;
     padding: 0.875rem 1.25rem;
     flex-wrap: wrap;
     gap: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   .nav-center {
     order: 3;
@@ -172,49 +180,65 @@ footer { background: var(--dark); color: rgba(255,255,255,0.5); padding: 2.5rem;
     gap: 0.75rem;
   }
 
-  /* HERO — columna única, centrado */
+  /* HERO — columna única, todo centrado, sin desborde */
   #hero {
     grid-template-columns: 1fr;
+    min-height: auto;
     padding: 7rem 1.25rem 3rem;
-    gap: 2.5rem;
+    gap: 2rem;
     text-align: center;
     justify-items: center;
+    width: 100%;
+    overflow: hidden;
   }
   .hero-left {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
   }
   .hero-sub {
     text-align: center;
+    max-width: 100%;
   }
   .hero-actions {
     justify-content: center;
+    width: 100%;
   }
   .hero-stats {
     justify-content: center;
     gap: 1.5rem;
-  }
-  .hero-right {
-    order: -1;   /* carousel arriba */
     width: 100%;
   }
 
-  /* CAROUSEL — que no desborde */
+  /* CAROUSEL — pegado al borde, sin salirse */
+  .hero-right {
+    order: -1;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
   .carousel-wrap {
     width: 100%;
     max-width: 100%;
     border-radius: 12px;
+    overflow: hidden;
   }
   .carousel-track {
     width: 100%;
   }
   .carousel-slide {
     min-width: 100%;
-    padding: 1rem;
+    max-width: 100%;
+    padding: 1.5rem 1rem;
+    box-sizing: border-box;
+  }
+  .slide-icon {
+    font-size: 2.5rem;
   }
   .slide-label {
     font-size: 0.95rem;
+    padding: 0 1rem;
   }
   .slide-sub {
     font-size: 0.75rem;
@@ -227,10 +251,23 @@ footer { background: var(--dark); color: rgba(255,255,255,0.5); padding: 2.5rem;
   /* SECTIONS */
   section:not(#hero) {
     padding: 3.5rem 1.25rem;
+    overflow: hidden;
+  }
+  .section-title {
+    text-align: center;
   }
   .section-sub {
     text-align: center;
     max-width: 100%;
+  }
+  .section-label {
+    text-align: center;
+    display: block;
+  }
+  .container {
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
   /* GRIDS */
@@ -251,11 +288,15 @@ footer { background: var(--dark); color: rgba(255,255,255,0.5); padding: 2.5rem;
   .division-hero {
     padding: 6rem 1.25rem 3rem;
     text-align: center;
+    justify-content: center;
+    min-height: auto;
+  }
+  .division-hero .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .division-hero .hero-actions {
-    justify-content: center;
-  }
-  .division-hero > .container > div[style] {
     justify-content: center;
   }
 
@@ -273,29 +314,26 @@ footer { background: var(--dark); color: rgba(255,255,255,0.5); padding: 2.5rem;
 }
 
 /* Pantallas muy pequeñas */
-@media (max-width: 400px) {
+@media (max-width: 420px) {
   h1 {
-    font-size: 1.75rem;
+    font-size: 1.8rem;
   }
   .hero-stats {
-    flex-direction: column;
-    gap: 0.75rem;
-    align-items: center;
+    gap: 1rem;
   }
   .hero-actions {
     flex-direction: column;
-    width: 100%;
   }
   .btn-primary,
   .btn-outline {
     width: 100%;
     text-align: center;
   }
-  .nav-center {
-    gap: 0;
-  }
   .nav-center a {
-    padding: 0.4rem 0.6rem;
-    font-size: 0.8rem;
+    padding: 0.35rem 0.55rem;
+    font-size: 0.78rem;
+  }
+  .slide-icon {
+    font-size: 2rem;
   }
 }
