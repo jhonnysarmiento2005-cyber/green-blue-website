@@ -59,6 +59,8 @@ if (form) {
     const templateParams = {
       nombre:   form.querySelector('input[placeholder="Tu nombre"]').value,
       empresa:  form.querySelector('input[placeholder="Tu negocio"]').value,
+      email:    form.querySelector('input[type="email"]').value,
+      telefono: form.querySelector('input[type="tel"]').value,
       servicio: form.querySelector('select').value,
       mensaje:  form.querySelector('textarea').value,
     };
