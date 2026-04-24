@@ -1,5 +1,8 @@
 // Green & Blue Industries — script.js
 
+// EMAILJS
+emailjs.init("TA9jczRUQgCpSApBO");
+
 // CAROUSEL
 const track = document.getElementById('track');
 if (track) {
@@ -48,19 +51,38 @@ const form = document.getElementById('contactForm');
 if (form) {
   form.addEventListener('submit', function(e) {
     e.preventDefault();
+
     const btn = form.querySelector('button[type="submit"]');
     btn.textContent = 'Enviando...';
     btn.disabled = true;
-    // TODO: Conectar con EmailJS
-    setTimeout(() => {
-      btn.textContent = '¡Mensaje enviado!';
-      btn.style.background = 'var(--green-dark)';
-      form.reset();
-      setTimeout(() => {
-        btn.textContent = 'Enviar mensaje';
-        btn.style.background = '';
+
+    const templateParams = {
+      nombre:   form.querySelector('input[placeholder="Tu nombre"]').value,
+      empresa:  form.querySelector('input[placeholder="Tu negocio"]').value,
+      servicio: form.querySelector('select').value,
+      mensaje:  form.querySelector('textarea').value,
+    };
+
+    emailjs.send("service_revg9tn", "template_sfie9tm", templateParams)
+      .then(() => {
+        btn.textContent = '¡Mensaje enviado!';
+        btn.style.background = 'var(--green-dark)';
+        form.reset();
+        setTimeout(() => {
+          btn.textContent = 'Enviar mensaje';
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 3000);
+      })
+      .catch((error) => {
+        console.error('EmailJS error:', error);
+        btn.textContent = 'Error al enviar. Intenta de nuevo.';
+        btn.style.background = '#e53e3e';
         btn.disabled = false;
-      }, 3000);
-    }, 1000);
+        setTimeout(() => {
+          btn.textContent = 'Enviar mensaje';
+          btn.style.background = '';
+        }, 3000);
+      });
   });
 }
